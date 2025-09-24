@@ -40,7 +40,11 @@ else
     [Fdir,name,ext]=fileparts(wfn);
     wfn=[Fdir '/' name '.mat'];
     if ~exist(wfn,'file'), error('file not found: wfn=%s',wfn); end
-    wf = load_waveform(wfn,true,true);       % load waveform
+    try
+        wf = load_waveform(wfn,true,true);       % load waveform
+    catch
+        load(wfn)
+    end
 end
 
 %% parsing inputs
